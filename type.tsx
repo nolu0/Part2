@@ -7,7 +7,8 @@ export type MenuItem = {
 };
 
 export type RootStackParamList = {
-  Home: undefined;
-  Menu: undefined;
-  Payment: undefined;
+  Home: undefined;                // HomeScreen doesn't need any params
+  Menu: undefined;                // MenuScreen doesn't need any params
+  Payment: undefined;             // PaymentScreen doesn't need any params
+  Filter: { menuItems: MenuItem[] }; // FilterScreen expects an array of MenuItem
 };
