@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
 import { SafeAreaView, View, Text, FlatList, StyleSheet } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import { MenuItem } from './type';
+import { useRoute } from '@react-navigation/native';
+import { RouteProp } from '@react-navigation/native';
+import { RootStackParamList, MenuItem } from './type';
 
-// Sample data (can be replaced with data from MenuScreen via context or props)
-const sampleMenu: MenuItem[] = [
-  { id: '1', name: 'Caesar Salad', description: 'Fresh greens with dressing', coursetype: 'Starter', price: 45 },
-  { id: '2', name: 'Grilled Chicken', description: 'Served with veggies', coursetype: 'Main', price: 85 },
-  { id: '3', name: 'Chocolate Cake', description: 'Rich and moist', coursetype: 'Dessert', price: 35 },
-];
+type FilterScreenRouteProp = RouteProp<RootStackParamList, 'Filter'>;
 
 export default function FilterScreen() {
+  const route = useRoute<FilterScreenRouteProp>();
+  const { menuItems } = route.params;
+
   const [filterType, setFilterType] = useState('All');
   const course = ['Starter', 'Main', 'Dessert'];
 
   // Filter menu items
   const filteredItems =
     filterType === 'All'
-      ? sampleMenu
-      : sampleMenu.filter((item) => item.coursetype === filterType);
+      ? menuItems
+      : menuItems.filter((item) => item.coursetype === filterType);
 
   return (
     <SafeAreaView style={styles.container}>
